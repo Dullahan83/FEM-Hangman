@@ -1,5 +1,4 @@
 import { ComponentPropsWithoutRef } from "react";
-import Modal from "./Modal/Modal";
 
 const Layout = ({
   children,
@@ -11,7 +10,7 @@ const Layout = ({
       className={`${props.className}  z-0  w-full h-full flex flex-col `}
     >
       {children}
-      <Modal />
+      {/* <Modal /> */}
     </main>
   );
 };

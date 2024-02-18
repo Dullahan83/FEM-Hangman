@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import { generateRandomNumber, getDatas } from "../Utils/function";
+import { generateRandomNumber } from "../Utils/function";
 import { DataType, Hangword } from "../Utils/types";
 
 type State = {
@@ -10,6 +10,7 @@ type State = {
   currentWord: Hangword;
   health: number;
   usedLetters: string[];
+  isCategoryFinished: boolean;
 };
 
 type Actions = {
@@ -27,12 +28,16 @@ const useStore = create<State & Actions>()(
   persist(
     immer((set) => ({
       data: initialData,
-      currentCategory: "",
+      currentCategory: "Countries",
       currentWord: { name: "United kingdom", selected: false },
       health: 100,
-      usedLetters: [],
+      usedLetters: ["i", "n", "d", "o"],
+      isCategoryFinished: false,
       changeCategory: (val) =>
         set((state) => {
+          state.isCategoryFinished = state.data.categories[val].every(
+            (word) => word.selected === true
+          );
           state.currentCategory = val;
           const categoryLength = state.data?.categories[val]?.length;
           state.health = 100;
@@ -45,29 +50,23 @@ const useStore = create<State & Actions>()(
         }),
       changeWord: () =>
         set((state) => {
-          console.log("Hello There");
-
           const currentCategory = state.currentCategory;
           const indexWord = state.data.categories[currentCategory].findIndex(
             (word) => word.name === state.currentWord.name
           );
-          console.log(indexWord);
 
           if (indexWord === -1) return;
           state.data.categories[currentCategory][indexWord].selected = true;
-          const categoryLength = state.data.categories[currentCategory].length;
-
-          const random = generateRandomNumber(categoryLength);
-          if (
-            state.data?.categories[currentCategory][random]?.selected ===
-              true ||
-            indexWord === random ||
-            state.data?.categories[currentCategory][random]?.name ===
-              state.currentWord.name
-          ) {
-            state.changeWord();
+          const pickingArray = state.data.categories[currentCategory].filter(
+            (word) =>
+              word.selected === false && word.name != state.currentWord.name
+          );
+          if (!pickingArray.length) {
+            state.isCategoryFinished = true;
+            return;
           }
-          state.currentWord = state.data.categories[currentCategory][random];
+          const random = generateRandomNumber(pickingArray.length);
+          state.currentWord = pickingArray[random];
           state.health = 100;
           state.usedLetters = [];
         }),
@@ -85,9 +84,13 @@ const useStore = create<State & Actions>()(
         }),
       resetCategory: () =>
         set((state) => {
-          state.data?.categories[state.currentCategory]?.forEach(
-            (word) => (word.selected = false)
+          const keys = Object.keys(state.data.categories);
+          keys.forEach((key) =>
+            state.data.categories[key].map(
+              (_, i) => (state.data.categories[key][i].selected = false)
+            )
           );
+          state.isCategoryFinished = false;
         }),
     })),
 
@@ -105,23 +108,23 @@ const useStore = create<State & Actions>()(
   )
 );
 
-const initializeData = async () => {
-  const storedData = useStore.getState();
-  if (Object.keys(storedData.data.categories).length === 0) {
-    const datas = (await getDatas()) as DataType;
-    if (datas && datas.categories) {
-      const firstCategoryKey = Object.keys(datas.categories)[0];
-      const firstWord = datas.categories[firstCategoryKey]?.[0]; // Assuming there is at least one word
-      if (firstWord) {
-        useStore.setState({
-          data: datas,
-          currentCategory: firstCategoryKey,
-          currentWord: firstWord,
-        });
-      }
-    }
-  }
-};
+// const initializeData = async () => {
+//   const storedData = useStore.getState();
+//   if (Object.keys(storedData.data.categories).length === 0) {
+//     const datas = (await getDatas()) as DataType;
+//     if (datas && datas.categories) {
+//       const firstCategoryKey = Object.keys(datas.categories)[0];
+//       const firstWord = datas.categories[firstCategoryKey]?.[0]; // Assuming there is at least one word
+//       if (firstWord) {
+//         useStore.setState({
+//           data: datas,
+//           currentCategory: firstCategoryKey,
+//           currentWord: firstWord,
+//         });
+//       }
+//     }
+//   }
+// };
 
-initializeData();
+// initializeData();
 export default useStore;

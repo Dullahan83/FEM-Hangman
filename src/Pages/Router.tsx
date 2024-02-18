@@ -8,10 +8,10 @@ const Router = () => {
   return (
     <BrowserRouter basename="/">
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/qd" element={<Home />} />
         <Route path="/Rules" element={<Rules />} />
         <Route path="/Categories" element={<Categories />} />
-        <Route path="/InGame/:category" element={<Ingame />} />
+        <Route path="/" element={<Ingame />} />
       </Routes>
     </BrowserRouter>
   );

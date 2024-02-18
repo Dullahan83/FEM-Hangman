@@ -11,7 +11,7 @@ const Letter = ({ Variant, children, ...props }: LetterProps) => {
       return (
         <button
           {...props}
-          className="py-[10px] px-[10.8px] w-[28.89px] sm:py-[13px] sm:w-16 text-[24px] lg:w-[109px] tracking-tighter leading-150 sm:leading-120 sm:text-Heading-M bg-white rounded-lg  sm:rounded-[24px] disabled:opacity-25 hover:bg-primary hover:text-white active:bg-primary active:text-white"
+          className="py-[10px] px-[10.8px] w-[28.89px] sm:py-[13px] sm:w-16 text-[24px] lg:w-[109px] tracking-tighter leading-150 sm:leading-120 sm:text-Heading-M bg-white rounded-lg  sm:rounded-[24px] disabled:opacity-25 hover:bg-primary hover:text-white active:bg-primary disabled:hover:bg-white disabled:hover:opacity-25 disabled:hover:text-secondary active:text-white"
         >
           {children}
         </button>

@@ -15,7 +15,6 @@ const Pause = () => {
   const handleCategoryChange = () => {
     closeModal();
     navigate("/categories");
-    resetCategory();
   };
   const handleQuit = () => {
     closeModal();

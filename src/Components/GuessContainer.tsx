@@ -21,7 +21,7 @@ const GuessContainer = () => {
         </Letter>
       );
     } else if (char.match(/\s+/g)) {
-      return null;
+      return <Letter Variant="Blank">{null}</Letter>;
     } else
       return (
         <Letter key={index} Variant="Empty">

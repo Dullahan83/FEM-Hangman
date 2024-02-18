@@ -12,7 +12,7 @@ const Rules = () => {
     <Layout className="px-6 py-8 pb-15 sm:py-61 sm:pl-10 sm:pr-12 lg:px-28 lg:py-20 justify-between before:content-[''] before:absolute before:left-0 before:top-0 before:w-screen before:h-screen before:bg-gradient-to-b before:from-[#190439bf] before:via-[#151278bf] before:via-70% before:to-[#2b1677bf]  before:-z-10 ">
       <Header Variant="Regular" className="justify-end sm:justify-center">
         <Button
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/")}
           Variant="Utils"
           className="absolute left-0"
         >

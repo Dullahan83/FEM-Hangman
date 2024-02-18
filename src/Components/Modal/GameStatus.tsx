@@ -11,13 +11,12 @@ const GameStatus = ({ Status }: { Status: "Win" | "Lose" }) => {
   const { closeModal } = useModal();
 
   const handleNewRound = () => {
-    closeModal();
     changeWord();
+    closeModal();
   };
   const handleCategoryChange = () => {
     closeModal();
     navigate("/categories");
-    resetCategory();
   };
   const handleQuit = () => {
     closeModal();

@@ -3,7 +3,7 @@ import useModal from "./useModal";
 import useStore from "./useStore";
 
 const useGame = () => {
-  const { currentWord, health, reduceHealth, usedLetters, addLetter, data } =
+  const { currentWord, health, reduceHealth, usedLetters, addLetter } =
     useStore();
 
   const [wordCheck, setWordCheck] = useState<string[]>();
@@ -14,7 +14,6 @@ const useGame = () => {
       return;
     else if (!currentWord.name.toUpperCase().includes(letter)) {
       reduceHealth();
-      return;
     }
     addLetter(letter);
     setWordCheck((prev) => {
@@ -24,7 +23,6 @@ const useGame = () => {
   useEffect(() => {
     const temp = [...currentWord.name].filter((char) => char.match(/\w+/g));
     setWordCheck(temp);
-    console.log(data);
   }, [currentWord.name]);
   useEffect(() => {
     health === 0 && openModal("Lose");

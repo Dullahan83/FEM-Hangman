@@ -7,7 +7,7 @@ html {
   display: flex;
   align-items: center;
   background-color: rgb(73, 87, 87);
-  background-image: url("/public/assets/images/background-mobile.svg");
+  background-image: url("/assets/images/background-mobile.svg");
 }
 
 html,
@@ -36,6 +36,10 @@ body {
 }
 dialog {
   all: unset;
+}
+
+button {
+  transition: all 0.1s ease-in-out;
 }
 .shadow-title {
   position: relative;
@@ -76,7 +80,7 @@ dialog {
     top: 5px;
   }
   html {
-    background-image: url("/public/assets/images/background-desktop.svg");
+    background-image: url("/assets/images/background-desktop.svg");
     object-fit: cover;
     color: #2b1677bf;
   }
@@ -84,7 +88,7 @@ dialog {
 
 @media screen and (min-width: 1024px) {
   html {
-    background-image: url("/public/assets/images/background-desktop.svg");
+    background-image: url("/assets/images/background-desktop.svg");
     background-repeat: no-repeat;
     background-size: cover;
   }

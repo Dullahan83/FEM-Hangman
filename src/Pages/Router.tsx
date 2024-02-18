@@ -6,7 +6,7 @@ import Rules from "./Rules";
 
 const Router = () => {
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="/FEM-Hangman">
       <Routes>
         <Route path="/qd" element={<Home />} />
         <Route path="/Rules" element={<Rules />} />

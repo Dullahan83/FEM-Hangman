@@ -31,7 +31,7 @@ const GuessContainer = () => {
   };
 
   return (
-    <section className="flex flex-wrap gap-y-3 gap-x-[7px] items-center justify-center">
+    <section className="flex flex-wrap gap-y-3 gap-x-[7px] items-center justify-center sm:my-20">
       {wordLines.map((line, lineIndex) => (
         <div
           key={lineIndex}

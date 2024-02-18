@@ -14,6 +14,7 @@ const useGame = () => {
       return;
     else if (!currentWord.name.toUpperCase().includes(letter)) {
       reduceHealth();
+      return;
     }
     addLetter(letter);
     setWordCheck((prev) => {
